@@ -12,6 +12,18 @@ var PeopleCollection = Backbone.Collection.extend({
 	model: Person
 });
 
+// View for all people
+var PeopleView = Backbone.View.extend({
+	tagName: 'ul',
+	render: function(){
+		this.collection.each(function(person){
+			var personView = new PersonView({ model: person });
+			this.$el.append(personView.render().el); // calling render method manually..
+		}, this);
+		return this; // returning this for chaining..
+	}
+});
+
 // The View for a Person
 var PersonView = Backbone.View.extend({
 	tagName: 'li',
